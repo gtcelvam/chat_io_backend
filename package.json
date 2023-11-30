@@ -1,0 +1,22 @@
+{
+  "name": "chat_app_backend",
+  "version": "1.0.0",
+  "description": "Explore Socket IO",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtcelvam/chat_io_backend.git"
+  },
+  "author": "TS",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.2",
+    "nodemon": "^3.0.1",
+    "socket.io": "^4.7.2"
+  }
+}

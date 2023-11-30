@@ -1,0 +1,50 @@
+<!-- index.html -->
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.io Chat</title>
+    <script src="https://cdn.socket.io/4.1.3/socket.io.min.js"></script>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+  </body>
+</html>
+
+<!-- ... (unchanged) -->
+
+<script>
+  const socket = io();
+
+  // Prompt the user for a username
+  const username = prompt("Enter your username:");
+  socket.emit("setUsername", username);
+
+  // Handle form submission
+  document.querySelector("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const messageInput = document.getElementById("m");
+    const recipient = prompt("Enter the recipient username:");
+    const message = messageInput.value;
+
+    // Send a private message
+    socket.emit("private message", { recipient, message });
+
+    messageInput.value = "";
+    return false;
+  });
+
+  // Receive and display private chat messages
+  socket.on("private message", ({ sender, message }) => {
+    const messages = document.getElementById("messages");
+    const li = document.createElement("li");
+    li.textContent = `Private from ${sender}: ${message}`;
+    messages.appendChild(li);
+  });
+</script>
